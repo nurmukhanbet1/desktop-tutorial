@@ -1,0 +1,64 @@
+package main
+
+import "fmt"
+
+type samsung interface {
+	getPrice() int
+}
+
+type samsungCase struct {
+}
+
+func (p *samsungCase) getPrice() int {
+	return 20
+}
+
+type buds struct {
+}
+
+func (p *buds) getPrice() int {
+	return 15
+}
+
+type typeC struct {
+	pizza   samsung
+	samsung *PhoneCase
+}
+
+func (c *typeC) getPrice() int {
+	pizzaPrice := c.pizza.getPrice()
+	return pizzaPrice + 7
+}
+
+type PhoneCase struct {
+	samsung samsung
+}
+
+func (c *PhoneCase) getPrice() int {
+	samsungPrice := c.samsung.getPrice()
+	return samsungPrice + 10
+}
+
+func main() {
+
+	samsungBuds := &buds{}
+
+	samsungBudsWithCase := &PhoneCase{
+		samsung: samsungBuds,
+	}
+
+	samsungWithBudsWithCaseWithTypeC := &typeC{
+		samsung: samsungBudsWithCase,
+	}
+
+	fmt.Printf("Price of samsung with case and buds and charger is %d\n", samsungWithBudsWithCaseWithTypeC.getPrice())
+
+	TypeC := &samsungCase{}
+
+	//Add cheese topping
+	SamsungWithCase := &PhoneCase{
+		samsung: TypeC,
+	}
+
+	fmt.Printf("Price of samsung with case%d\n", SamsungWithCase.getPrice())
+}

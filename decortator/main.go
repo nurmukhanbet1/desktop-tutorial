@@ -6,12 +6,12 @@ func main() {
 
 	samsungPhone := &PhoneCase{}
 
-	//Add cheese topping
+	
 	phoneWithBuds := &buds{
 		samsungPhone: samsungPhone,
 	}
 
-	//Add tomato topping
+
 	samsungWithCaseAndTypeC := &typeC{
 		samsungPhone: phoneWithBuds,
 	}
